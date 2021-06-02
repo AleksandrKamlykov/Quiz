@@ -5,7 +5,7 @@ import { Link } from "react-router-dom"
 
 const finishQuiz = props => {
 
-    const succesCount = Object.keys(props.results).reduce((total, key) => {
+    const successCount = Object.keys(props.results).reduce((total, key) => {
         if (props.results[key] === "success") {
             total++
         }
@@ -30,7 +30,7 @@ const finishQuiz = props => {
             })}
 
         </ul>
-        <p>правильно {succesCount} из {props.quiz.length}</p>
+        <p>правильно {successCount} из {props.quiz.length}</p>
         <Button onClick={props.onRetry} type="primary" >Повторить</Button>
         <Link to="/">
             <Button type="success">Перейти в список тестов</Button>

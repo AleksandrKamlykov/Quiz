@@ -139,6 +139,7 @@ export default class Auth extends Component {
     }
 
     render() {
+        console.log(this.props)
         return (
             <div className={classes.Auth}>
                 <div>

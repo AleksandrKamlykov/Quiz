@@ -7,8 +7,10 @@ import Drawer from "../../components/Drawer/Drawer"
 export default class Layout extends Component {
 
     state = {
-        menu: false
+        menu: false,
+
     }
+
 
     toggleMenuHandler = () => {
         this.setState({
@@ -22,19 +24,23 @@ export default class Layout extends Component {
         })
     }
 
+
+
+
     render() {
         return (
             <div className={Classes.Layout}>
                 <Drawer
                     isOpen={this.state.menu}
                     onClose={this.menuCloseHandler}
+
                 />
                 <MenuToggle
                     onToggle={this.toggleMenuHandler}
                     isOpen={this.state.menu}
                 />
 
-                <main>
+                <main >
                     {this.props.children}
                 </main>
             </div>

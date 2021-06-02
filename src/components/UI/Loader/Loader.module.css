@@ -12,8 +12,8 @@
 
 .Loader div {
     position: absolute;
-    width: 6px;
-    height: 6px;
+    width: 5px;
+    height: 5px;
     background: #fff;
     border-radius: 50%;
     animation: Loader 1.2s linear infinite;
@@ -101,6 +101,6 @@
     }
 
     50% {
-        transform: scale(1.5);
+        transform: scale(1.7);
     }
 }
