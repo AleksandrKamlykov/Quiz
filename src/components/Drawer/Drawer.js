@@ -3,14 +3,11 @@ import classes from "./Drawer.module.css"
 import Backdrop from "../UI/Backdrop/Backdrop"
 import ThemeToggler from "../UI/ThemeToggler/ThemeToggler"
 import { NavLink } from "react-router-dom"
+import {connect} from "react-redux";
 
-const links = [
-    { to: "/", label: "Список", exact: true },
-    { to: "/auth", label: "Авторизация", exact: true },
-    { to: "/quiz-creator", label: "Создать тест", exact: true },
-]
 
-export default class Drawer extends Component {
+
+class Drawer extends Component {
 
     state = {
         theme: true,     ///false - day, true - night
@@ -27,11 +24,11 @@ export default class Drawer extends Component {
 
 
     }
-    object__
 
 
 
-    renderLinks() {
+
+    renderLinks(links) {
         return links.map((link, index) => {
             return (
                 <li key={index}
@@ -60,13 +57,26 @@ export default class Drawer extends Component {
             cls.push(classes.close)
         }
 
+        const links = [
+            { to: "/", label: "Список", exact: true },
+        ]
+
+        if (this.props.isAuthenticated){
+            links.push({ to: "/quiz-creator", label: "Создать тест", exact: false })
+            links.push({ to: "/logout", label: "Выйти", exact: false })
+        }else {
+            links.push({ to: "/auth", label: "Авторизация", exact: false })
+        }
+
+        console.log(this.props.isAuthenticated)
+
         return (
             <React.Fragment>
 
                 <nav className={cls.join(" ")}>
 
                     <ul>
-                        {this.renderLinks()}
+                        {this.renderLinks(links)}
                         <ThemeToggler
                             themeChange={this.themeChange}
                         />
@@ -79,3 +89,5 @@ export default class Drawer extends Component {
         )
     }
 }
+
+export default connect()(Drawer)
