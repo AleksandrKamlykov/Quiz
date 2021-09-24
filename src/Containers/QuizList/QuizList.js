@@ -26,8 +26,17 @@ class QuizList extends Component {
     }
 
     render() {
+        const cls = [classes.QuizList]
+
+
+        if (!this.props.theme.theme) {
+
+            cls.push(classes.dark)
+        } else {
+            cls.push(classes.light)
+        }
         return (
-            <div className={classes.QuizList}>
+            <div className={cls.join(" ")}>
                 <div>
                     <h1>Список тестов</h1>
 
@@ -48,7 +57,8 @@ class QuizList extends Component {
 function mapStateToProps(state) {
     return {
         quizes: state.quiz.quizes,
-        loading: state.quiz.loading
+        loading: state.quiz.loading,
+        theme: state.theme
     }
 }
 

@@ -4,23 +4,35 @@ import ActiveQuiz from "../components/ActiveQuiz/ActiveQuiz";
 import FinishQuiz from "../components/FinishQuiz/FinishQuiz"
 import Loader from "../components/UI/Loader/Loader"
 import { connect } from "react-redux";
-import {fetchQuizById, quizAnswerClick, retryQuiz} from "../store/actions/quiz";
+import { fetchQuizById, quizAnswerClick, retryQuiz } from "../store/actions/quiz";
 
 class Quiz extends Component {
 
 
     componentDidMount() {
-      this.props.fetchQuizById(this.props.match.params.id)
+        this.props.fetchQuizById(this.props.match.params.id)
     }
 
     componentWillUnmount() {
         this.props.retryQuiz()
     }
 
+
+
     render() {
 
+
+        const cls = [Classes.Quiz]
+
+        if (!this.props.theme.theme) {
+
+            cls.push(Classes.dark)
+        } else {
+            cls.push(Classes.light)
+        }
+
         return (
-            <div className={Classes.Quiz}>
+            <div className={cls.join(" ")}>
 
                 <div className={Classes.QuizWrapper}>
                     <h1>Ответьте на все вопросы</h1>
@@ -57,7 +69,8 @@ function mapStateToProps(state) {
         answerState: state.quiz.answerState,
         finishQuiz: state.quiz.finishQuiz,
         quiz: state.quiz.quiz,
-        loading: state.quiz.loading
+        loading: state.quiz.loading,
+        theme: state.theme
     }
 }
 
@@ -65,7 +78,7 @@ function mapDispatchToProps(dispatch) {
     return {
         fetchQuizById: id => dispatch(fetchQuizById(id)),
         quizAnswerClick: answerId => dispatch(quizAnswerClick(answerId)),
-        retryQuiz: ()=> dispatch(retryQuiz())
+        retryQuiz: () => dispatch(retryQuiz())
     }
 }
 

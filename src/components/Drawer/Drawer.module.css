@@ -7,7 +7,7 @@
     max-width: 300px;
     padding: 20px 10px;
     box-sizing: border-box;
-    background-color: #fff;
+
     transform: translateX(0px);
     transition: transform .22s ease-in;
     z-index: 90;
@@ -32,7 +32,7 @@
     color: #363d54;
     font-size: 30px;
     text-decoration: none;
-    background-color: #fff;
+    background-color: transparent;
     position: relative;
     padding: 0px 20px 10px 20px;
     transition: opacity .3s;
@@ -41,4 +41,17 @@
 .Drawer ul li a:hover,
 .active {
     opacity: .7;
+}
+
+.light {
+    background-color: #fff;
+}
+
+.dark {
+    background-color: rgb(105, 105, 105);
+
+}
+
+.Drawer.dark ul li a {
+    color: white;
 }

@@ -4,8 +4,8 @@ import classes from "./Auth.module.css"
 import Button from "../../components/UI/Button/Button"
 import Input from "../../components/UI/Input/Input"
 
-import {connect} from "react-redux";
-import {auth} from "../../store/actions/auth";
+import { connect } from "react-redux";
+import { auth } from "../../store/actions/auth";
 
 function validateEmail(email) {
     const re = /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -48,7 +48,7 @@ class Auth extends Component {
         event.preventDefault()
     }
 
-    loginHandler =  () => {
+    loginHandler = () => {
         this.props.auth(
             this.state.formControls.email.value,
             this.state.formControls.password.value,
@@ -59,7 +59,7 @@ class Auth extends Component {
 
     }
 
-    registerHandler =  () => {
+    registerHandler = () => {
         this.props.auth(
             this.state.formControls.email.value,
             this.state.formControls.password.value,
@@ -132,8 +132,18 @@ class Auth extends Component {
 
     render() {
 
+        const cls = [classes.Auth]
+
+
+        if (!this.props.theme.theme) {
+
+            cls.push(classes.dark)
+        } else {
+            cls.push(classes.light)
+        }
+
         return (
-            <div className={classes.Auth}>
+            <div className={cls.join(" ")}>
                 <div>
                     <h1>Авторизация</h1>
                     <form onSubmit={this.submitHandler} className={classes.AuthForm}>
@@ -147,10 +157,16 @@ class Auth extends Component {
     }
 }
 
-function mapDispatchToProps(dispatch){
+function mapStateToProps(state) {
     return {
-        auth: (email, password, isLogin)=> dispatch(auth(email, password, isLogin))
+        theme: state.theme
     }
 }
 
-export default  connect(null, mapDispatchToProps)(Auth)
+function mapDispatchToProps(dispatch) {
+    return {
+        auth: (email, password, isLogin) => dispatch(auth(email, password, isLogin))
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Auth)

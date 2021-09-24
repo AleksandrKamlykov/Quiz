@@ -47,3 +47,11 @@
 .QuizList li:hover>a {
     color: #363f54;
 }
+
+.light {
+    background: linear-gradient(90deg, #fd8355 0%, #f0576c 37%, #f79cbd 100%);
+}
+
+.dark {
+    background: linear-gradient(90deg, #a34d2e 0%, #913340 37%, #be748f 100%);
+}
